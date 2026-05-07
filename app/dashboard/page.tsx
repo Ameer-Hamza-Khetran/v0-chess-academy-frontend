@@ -2,23 +2,26 @@
 
 import { motion } from "framer-motion"
 import { 
-  BookOpen, 
   Trophy, 
   Clock, 
   TrendingUp, 
-  Play, 
   Calendar,
-  Target,
-  Flame,
-  ChevronRight,
   Settings,
   Bell,
   LogOut,
   User,
-  BarChart3
+  CreditCard,
+  CheckCircle2,
+  XCircle,
+  BookOpen,
+  GraduationCap,
+  Medal,
+  FileText,
+  ChevronRight,
+  ExternalLink
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import Link from "next/link"
@@ -29,96 +32,187 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
-const stats = [
-  { 
-    label: "Current Rating", 
-    value: "1,847", 
-    change: "+52 this month",
-    icon: TrendingUp,
-    color: "text-emerald-500"
-  },
-  { 
-    label: "Lessons Completed", 
-    value: "124", 
-    change: "8 this week",
-    icon: BookOpen,
-    color: "text-primary"
-  },
-  { 
-    label: "Puzzles Solved", 
-    value: "2,341", 
-    change: "156 this week",
-    icon: Target,
-    color: "text-amber-500"
-  },
-  { 
-    label: "Study Streak", 
-    value: "23 days", 
-    change: "Personal best!",
-    icon: Flame,
-    color: "text-rose-500"
-  },
-]
+// Student data
+const studentInfo = {
+  name: "John Doe",
+  email: "john.doe@email.com",
+  joinDate: "January 2024",
+  plan: "Club Player",
+}
 
-const recentLessons = [
-  {
-    title: "The Italian Game Masterclass",
-    instructor: "GM Alexander Volkov",
-    progress: 65,
-    nextLesson: "The Giuoco Piano - Part 3",
-    thumbnail: "Opening",
+// Ratings data
+const ratings = {
+  fide: {
+    current: 1847,
+    peak: 1892,
+    lastUpdated: "December 2024",
+    fideId: "12345678",
   },
-  {
-    title: "Rook Endgames Deep Dive",
-    instructor: "GM Alexander Volkov",
-    progress: 30,
-    nextLesson: "Lucena Position",
-    thumbnail: "Endgame",
+  chesscom: {
+    rapid: 1920,
+    blitz: 1856,
+    bullet: 1734,
+    puzzles: 2145,
+    username: "john_chess_master",
   },
-  {
-    title: "King Safety & Attack",
-    instructor: "GM Marcus Thompson",
-    progress: 45,
-    nextLesson: "Opposite Side Castling",
-    thumbnail: "Middlegame",
-  },
-]
+}
 
-const upcomingSessions = [
+// Fee details
+const feeDetails = {
+  plan: "Club Player",
+  monthlyFee: 149,
+  nextDueDate: "January 15, 2025",
+  status: "Paid",
+  paymentHistory: [
+    { month: "December 2024", amount: 149, status: "Paid", date: "Dec 1, 2024" },
+    { month: "November 2024", amount: 149, status: "Paid", date: "Nov 1, 2024" },
+    { month: "October 2024", amount: 149, status: "Paid", date: "Oct 1, 2024" },
+    { month: "September 2024", amount: 149, status: "Paid", date: "Sep 1, 2024" },
+  ],
+}
+
+// Session data with topics
+const sessions = [
   {
-    title: "1-on-1 Session",
+    sessionNumber: 24,
+    date: "Dec 20, 2024",
+    duration: "1.5 hours",
     trainer: "GM Alexander Volkov",
-    date: "Today",
-    time: "3:00 PM",
-    type: "Private",
+    topics: ["Rook Endgames - Lucena Position", "Philidor Defense in Endgames"],
   },
   {
-    title: "Group Tactics Class",
+    sessionNumber: 23,
+    date: "Dec 18, 2024",
+    duration: "1 hour",
+    trainer: "GM Alexander Volkov",
+    topics: ["Italian Game - Giuoco Piano Variation"],
+  },
+  {
+    sessionNumber: 22,
+    date: "Dec 15, 2024",
+    duration: "1.5 hours",
     trainer: "IM Sofia Martinez",
-    date: "Tomorrow",
-    time: "5:30 PM",
-    type: "Group",
+    topics: ["Tactical Patterns - Pins and Skewers", "Double Attack Combinations"],
   },
   {
-    title: "Opening Review",
+    sessionNumber: 21,
+    date: "Dec 13, 2024",
+    duration: "1 hour",
+    trainer: "GM Alexander Volkov",
+    topics: ["Sicilian Defense - Najdorf Variation Basics"],
+  },
+  {
+    sessionNumber: 20,
+    date: "Dec 10, 2024",
+    duration: "1.5 hours",
     trainer: "GM Marcus Thompson",
-    date: "Friday",
-    time: "4:00 PM",
-    type: "Private",
+    topics: ["Middlegame Planning", "Pawn Structure Analysis"],
   },
 ]
 
-const achievements = [
-  { name: "First Blood", description: "Win your first puzzle", unlocked: true },
-  { name: "Bookworm", description: "Complete 100 lessons", unlocked: true },
-  { name: "Streaker", description: "20 day study streak", unlocked: true },
-  { name: "Tactician", description: "Solve 1000 puzzles", unlocked: true },
-  { name: "Scholar", description: "Complete a full course", unlocked: false },
-  { name: "Master", description: "Reach 2000 rating", unlocked: false },
+// Topics learned (organized by category)
+const topicsLearned = {
+  openings: [
+    { name: "Italian Game - Giuoco Piano", sessions: [23, 18, 12] },
+    { name: "Sicilian Defense - Najdorf Variation", sessions: [21, 19] },
+    { name: "Queen's Gambit Declined", sessions: [17, 15, 10] },
+    { name: "Ruy Lopez - Morphy Defense", sessions: [14, 8] },
+    { name: "Caro-Kann Defense", sessions: [6, 4] },
+  ],
+  middlegame: [
+    { name: "Pawn Structure Analysis", sessions: [20, 16] },
+    { name: "Piece Coordination", sessions: [19, 13] },
+    { name: "King Safety Principles", sessions: [11, 7] },
+    { name: "Attack on the King", sessions: [9] },
+  ],
+  endgame: [
+    { name: "Rook Endgames - Lucena Position", sessions: [24] },
+    { name: "Philidor Defense in Endgames", sessions: [24] },
+    { name: "King and Pawn Endgames", sessions: [16, 5] },
+    { name: "Bishop vs Knight Endgames", sessions: [3] },
+  ],
+  tactics: [
+    { name: "Pins and Skewers", sessions: [22] },
+    { name: "Double Attack Combinations", sessions: [22, 15] },
+    { name: "Discovered Attacks", sessions: [13, 9] },
+    { name: "Back Rank Tactics", sessions: [7, 2] },
+  ],
+}
+
+// Tournament participations
+const tournaments = [
+  {
+    name: "City Chess Championship 2024",
+    date: "November 2024",
+    location: "Downtown Chess Club",
+    format: "Classical",
+    result: "3rd Place",
+    score: "5.5/7",
+    ratingChange: "+24",
+    positive: true,
+  },
+  {
+    name: "Rapid Open Tournament",
+    date: "October 2024",
+    location: "Online - Chess.com",
+    format: "Rapid",
+    result: "Top 20",
+    score: "6/9",
+    ratingChange: "+15",
+    positive: true,
+  },
+  {
+    name: "Club Monthly Blitz",
+    date: "September 2024",
+    location: "Academy Club Room",
+    format: "Blitz",
+    result: "2nd Place",
+    score: "8/10",
+    ratingChange: "+32",
+    positive: true,
+  },
+  {
+    name: "State Junior Championship",
+    date: "August 2024",
+    location: "State Convention Center",
+    format: "Classical",
+    result: "8th Place",
+    score: "4.5/7",
+    ratingChange: "-8",
+    positive: false,
+  },
+]
+
+// Progress reports
+const progressReports = [
+  {
+    period: "Q4 2024",
+    overallProgress: 85,
+    strengths: ["Opening Preparation", "Tactical Vision"],
+    areasToImprove: ["Time Management", "Endgame Technique"],
+    trainerNotes: "Excellent progress in tactical awareness. Focus on converting advantages in the endgame.",
+  },
+  {
+    period: "Q3 2024",
+    overallProgress: 72,
+    strengths: ["Calculation", "Pattern Recognition"],
+    areasToImprove: ["Opening Repertoire", "Positional Understanding"],
+    trainerNotes: "Good foundation in tactics. Need to expand opening knowledge and improve strategic play.",
+  },
 ]
 
 export default function DashboardPage() {
+  const totalSessions = sessions.length > 0 ? sessions[0].sessionNumber : 0
+
   return (
     <div className="min-h-screen bg-background">
       {/* Dashboard Header */}
@@ -156,7 +250,7 @@ export default function DashboardPage() {
                   <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                     <span className="text-sm font-semibold text-primary">JD</span>
                   </div>
-                  <span className="hidden sm:inline">John Doe</span>
+                  <span className="hidden sm:inline">{studentInfo.name}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
@@ -190,126 +284,377 @@ export default function DashboardPage() {
           className="mb-8"
         >
           <h1 className="font-serif text-3xl md:text-4xl font-bold mb-2">
-            Welcome back, John
+            Student Dashboard
           </h1>
           <p className="text-muted-foreground">
-            {"You're doing great! Keep up your study streak."}
+            Welcome back, {studentInfo.name}. Member since {studentInfo.joinDate}.
           </p>
         </motion.div>
 
-        {/* Stats Grid */}
+        {/* Quick Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card>
-                <CardContent className="p-4 md:p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <stat.icon className={`w-5 h-5 ${stat.color}`} />
-                    <span className="text-xs text-muted-foreground">{stat.change}</span>
-                  </div>
-                  <p className="text-2xl md:text-3xl font-bold">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <Card>
+              <CardContent className="p-4 md:p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <Trophy className="w-5 h-5 text-primary" />
+                  <span className="text-xs text-muted-foreground">FIDE</span>
+                </div>
+                <p className="text-2xl md:text-3xl font-bold">{ratings.fide.current}</p>
+                <p className="text-sm text-muted-foreground">FIDE Rating</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Card>
+              <CardContent className="p-4 md:p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <TrendingUp className="w-5 h-5 text-emerald-500" />
+                  <span className="text-xs text-muted-foreground">Chess.com</span>
+                </div>
+                <p className="text-2xl md:text-3xl font-bold">{ratings.chesscom.rapid}</p>
+                <p className="text-sm text-muted-foreground">Rapid Rating</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <Card>
+              <CardContent className="p-4 md:p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <BookOpen className="w-5 h-5 text-amber-500" />
+                  <span className="text-xs text-muted-foreground">Total</span>
+                </div>
+                <p className="text-2xl md:text-3xl font-bold">{totalSessions}</p>
+                <p className="text-sm text-muted-foreground">Sessions Taken</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <Card>
+              <CardContent className="p-4 md:p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <Medal className="w-5 h-5 text-rose-500" />
+                  <span className="text-xs text-muted-foreground">2024</span>
+                </div>
+                <p className="text-2xl md:text-3xl font-bold">{tournaments.length}</p>
+                <p className="text-sm text-muted-foreground">Tournaments</p>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Continue Learning */}
+            {/* Ratings Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-xl">Continue Learning</CardTitle>
-                  <Link href="/lessons">
-                    <Button variant="ghost" size="sm">
-                      View All
-                      <ChevronRight className="w-4 h-4 ml-1" />
-                    </Button>
-                  </Link>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <Trophy className="w-5 h-5 text-primary" />
+                    Ratings
+                  </CardTitle>
+                  <CardDescription>Your official chess ratings across platforms</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  {recentLessons.map((lesson) => (
-                    <div
-                      key={lesson.title}
-                      className="flex items-center gap-4 p-4 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer group"
-                    >
-                      <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                        <span className="text-xs font-medium text-primary">{lesson.thumbnail}</span>
+                <CardContent>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* FIDE Rating */}
+                    <div className="p-4 bg-secondary/30 rounded-lg">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className="font-semibold">FIDE Rating</h4>
+                        <Badge variant="outline">Official</Badge>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold truncate group-hover:text-primary transition-colors">
-                          {lesson.title}
-                        </h4>
-                        <p className="text-sm text-muted-foreground">{lesson.instructor}</p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <Progress value={lesson.progress} className="h-1.5 flex-1" />
-                          <span className="text-xs text-muted-foreground">{lesson.progress}%</span>
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Current Rating</span>
+                          <span className="font-bold text-xl">{ratings.fide.current}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Peak Rating</span>
+                          <span className="font-medium">{ratings.fide.peak}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">FIDE ID</span>
+                          <span className="font-mono text-sm">{ratings.fide.fideId}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Last Updated</span>
+                          <span className="text-sm">{ratings.fide.lastUpdated}</span>
                         </div>
                       </div>
-                      <div className="hidden sm:block text-right">
-                        <p className="text-xs text-muted-foreground mb-1">Next:</p>
-                        <p className="text-sm font-medium">{lesson.nextLesson}</p>
-                      </div>
-                      <Button size="icon" className="shrink-0 bg-primary text-primary-foreground hover:bg-primary/90">
-                        <Play className="w-4 h-4" />
-                      </Button>
                     </div>
-                  ))}
+
+                    {/* Chess.com Rating */}
+                    <div className="p-4 bg-secondary/30 rounded-lg">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className="font-semibold">Chess.com</h4>
+                        <a 
+                          href={`https://chess.com/member/${ratings.chesscom.username}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline text-sm flex items-center gap-1"
+                        >
+                          @{ratings.chesscom.username}
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Rapid</span>
+                          <span className="font-bold">{ratings.chesscom.rapid}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Blitz</span>
+                          <span className="font-medium">{ratings.chesscom.blitz}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Bullet</span>
+                          <span className="font-medium">{ratings.chesscom.bullet}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Puzzles</span>
+                          <span className="font-medium text-emerald-500">{ratings.chesscom.puzzles}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
 
-            {/* Rating Progress Chart */}
+            {/* Sessions & Topics Learned */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-xl">Rating Progress</CardTitle>
-                  <Badge variant="secondary">
-                    <TrendingUp className="w-3 h-3 mr-1" />
-                    +52 this month
-                  </Badge>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <GraduationCap className="w-5 h-5 text-primary" />
+                    Sessions & Topics Learned
+                  </CardTitle>
+                  <CardDescription>
+                    Total sessions: {totalSessions} | Topics covered in each session
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-48 flex items-end gap-2">
-                    {[1720, 1735, 1750, 1768, 1785, 1795, 1810, 1825, 1832, 1840, 1845, 1847].map((rating, index) => {
-                      const maxRating = 1850
-                      const minRating = 1700
-                      const height = ((rating - minRating) / (maxRating - minRating)) * 100
-                      return (
-                        <div key={index} className="flex-1 flex flex-col items-center gap-1">
-                          <motion.div
-                            initial={{ height: 0 }}
-                            animate={{ height: `${height}%` }}
-                            transition={{ duration: 0.5, delay: index * 0.05 }}
-                            className="w-full bg-primary/20 rounded-t-sm relative group cursor-pointer"
-                          >
-                            <div className="absolute inset-x-0 bottom-0 bg-primary rounded-t-sm transition-all group-hover:opacity-80" style={{ height: '100%' }} />
-                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-card px-2 py-1 rounded text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-border">
-                              {rating}
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-20">Session</TableHead>
+                          <TableHead>Date</TableHead>
+                          <TableHead>Duration</TableHead>
+                          <TableHead>Trainer</TableHead>
+                          <TableHead>Topics Covered</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {sessions.map((session) => (
+                          <TableRow key={session.sessionNumber}>
+                            <TableCell className="font-medium">#{session.sessionNumber}</TableCell>
+                            <TableCell>{session.date}</TableCell>
+                            <TableCell>{session.duration}</TableCell>
+                            <TableCell className="text-muted-foreground">{session.trainer}</TableCell>
+                            <TableCell>
+                              <div className="flex flex-wrap gap-1">
+                                {session.topics.map((topic, idx) => (
+                                  <Badge key={idx} variant="secondary" className="text-xs">
+                                    {topic}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                  <Button variant="ghost" className="w-full mt-4" size="sm">
+                    View All Sessions
+                    <ChevronRight className="w-4 h-4 ml-1" />
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Topics by Category */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <BookOpen className="w-5 h-5 text-primary" />
+                    Topics Learned by Category
+                  </CardTitle>
+                  <CardDescription>All topics covered, organized by chess phase</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {Object.entries(topicsLearned).map(([category, topics]) => (
+                      <div key={category} className="space-y-3">
+                        <h4 className="font-semibold capitalize text-primary">
+                          {category}
+                        </h4>
+                        <div className="space-y-2">
+                          {topics.map((topic, idx) => (
+                            <div 
+                              key={idx} 
+                              className="flex items-center justify-between p-2 bg-secondary/20 rounded-lg text-sm"
+                            >
+                              <span>{topic.name}</span>
+                              <span className="text-xs text-muted-foreground">
+                                Session{topic.sessions.length > 1 ? 's' : ''}: {topic.sessions.join(', ')}
+                              </span>
                             </div>
-                          </motion.div>
-                          <span className="text-[10px] text-muted-foreground">
-                            {index === 0 ? 'Jan' : index === 11 ? 'Dec' : ''}
-                          </span>
+                          ))}
                         </div>
-                      )
-                    })}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Tournament Participations */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <Medal className="w-5 h-5 text-primary" />
+                    Tournament Participations
+                  </CardTitle>
+                  <CardDescription>Your competitive chess history</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {tournaments.map((tournament, index) => (
+                      <div 
+                        key={index}
+                        className="p-4 bg-secondary/30 rounded-lg"
+                      >
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h4 className="font-semibold">{tournament.name}</h4>
+                              <Badge variant="outline" className="text-xs">
+                                {tournament.format}
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                              {tournament.location} | {tournament.date}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-6">
+                            <div className="text-center">
+                              <p className="text-sm text-muted-foreground">Result</p>
+                              <p className="font-semibold">{tournament.result}</p>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-sm text-muted-foreground">Score</p>
+                              <p className="font-medium">{tournament.score}</p>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-sm text-muted-foreground">Rating</p>
+                              <p className={`font-semibold ${tournament.positive ? 'text-emerald-500' : 'text-rose-500'}`}>
+                                {tournament.ratingChange}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Progress Reports */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-primary" />
+                    Progress Reports
+                  </CardTitle>
+                  <CardDescription>Quarterly assessments from your trainers</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    {progressReports.map((report, index) => (
+                      <div 
+                        key={index}
+                        className="p-4 bg-secondary/30 rounded-lg"
+                      >
+                        <div className="flex items-center justify-between mb-4">
+                          <h4 className="font-semibold">{report.period}</h4>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm text-muted-foreground">Overall Progress:</span>
+                            <span className="font-bold text-primary">{report.overallProgress}%</span>
+                          </div>
+                        </div>
+                        <Progress value={report.overallProgress} className="h-2 mb-4" />
+                        <div className="grid md:grid-cols-2 gap-4 mb-4">
+                          <div>
+                            <p className="text-sm font-medium text-emerald-500 mb-2">Strengths</p>
+                            <div className="flex flex-wrap gap-1">
+                              {report.strengths.map((s, i) => (
+                                <Badge key={i} className="bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20">
+                                  {s}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-amber-500 mb-2">Areas to Improve</p>
+                            <div className="flex flex-wrap gap-1">
+                              {report.areasToImprove.map((a, i) => (
+                                <Badge key={i} className="bg-amber-500/10 text-amber-500 hover:bg-amber-500/20">
+                                  {a}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="p-3 bg-background/50 rounded-lg">
+                          <p className="text-sm text-muted-foreground italic">
+                            &quot;{report.trainerNotes}&quot;
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
@@ -318,90 +663,123 @@ export default function DashboardPage() {
 
           {/* Sidebar */}
           <div className="space-y-8">
-            {/* Upcoming Sessions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-xl">Upcoming Sessions</CardTitle>
-                  <Calendar className="w-5 h-5 text-muted-foreground" />
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {upcomingSessions.map((session) => (
-                    <div
-                      key={session.title}
-                      className="flex items-center gap-3 p-3 bg-secondary/30 rounded-lg"
-                    >
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                        <Clock className="w-5 h-5 text-primary" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-medium text-sm truncate">{session.title}</h4>
-                        <p className="text-xs text-muted-foreground truncate">{session.trainer}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm font-medium">{session.date}</p>
-                        <p className="text-xs text-muted-foreground">{session.time}</p>
-                      </div>
-                    </div>
-                  ))}
-                  <Button variant="outline" className="w-full">
-                    Schedule New Session
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Achievements */}
+            {/* Fee Details */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-xl">Achievements</CardTitle>
-                  <Trophy className="w-5 h-5 text-primary" />
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <CreditCard className="w-5 h-5 text-primary" />
+                    Fee Details
+                  </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-3 gap-3">
-                    {achievements.map((achievement) => (
-                      <div
-                        key={achievement.name}
-                        className={`flex flex-col items-center p-3 rounded-lg text-center ${
-                          achievement.unlocked
-                            ? "bg-primary/10"
-                            : "bg-muted/50 opacity-50"
-                        }`}
-                        title={achievement.description}
-                      >
-                        <div
-                          className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
-                            achievement.unlocked
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-muted text-muted-foreground"
-                          }`}
-                        >
-                          <Trophy className="w-5 h-5" />
-                        </div>
-                        <span className="text-xs font-medium truncate w-full">
-                          {achievement.name}
-                        </span>
-                      </div>
-                    ))}
+                <CardContent className="space-y-4">
+                  <div className="p-4 bg-primary/10 rounded-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-muted-foreground">Current Plan</span>
+                      <Badge className="bg-primary text-primary-foreground">{feeDetails.plan}</Badge>
+                    </div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-muted-foreground">Monthly Fee</span>
+                      <span className="font-bold text-xl">${feeDetails.monthlyFee}</span>
+                    </div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-muted-foreground">Next Due Date</span>
+                      <span className="font-medium">{feeDetails.nextDueDate}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Status</span>
+                      <Badge className="bg-emerald-500/10 text-emerald-500">
+                        <CheckCircle2 className="w-3 h-3 mr-1" />
+                        {feeDetails.status}
+                      </Badge>
+                    </div>
                   </div>
-                  <Button variant="ghost" className="w-full mt-4" size="sm">
-                    View All Achievements
-                    <ChevronRight className="w-4 h-4 ml-1" />
+
+                  <div>
+                    <h4 className="font-medium mb-3 text-sm">Payment History</h4>
+                    <div className="space-y-2">
+                      {feeDetails.paymentHistory.map((payment, index) => (
+                        <div 
+                          key={index}
+                          className="flex items-center justify-between p-2 bg-secondary/30 rounded-lg text-sm"
+                        >
+                          <div>
+                            <p className="font-medium">{payment.month}</p>
+                            <p className="text-xs text-muted-foreground">{payment.date}</p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">${payment.amount}</span>
+                            {payment.status === "Paid" ? (
+                              <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                            ) : (
+                              <XCircle className="w-4 h-4 text-rose-500" />
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <Button variant="outline" className="w-full">
+                    View Full Billing History
                   </Button>
                 </CardContent>
               </Card>
             </motion.div>
 
-            {/* Quick Actions */}
+            {/* Session Summary */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-primary" />
+                    Session Summary
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="text-center p-6 bg-primary/10 rounded-lg">
+                    <p className="text-4xl font-bold text-primary">{totalSessions}</p>
+                    <p className="text-muted-foreground">Total Sessions</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-4 bg-secondary/30 rounded-lg">
+                      <p className="text-2xl font-bold">
+                        {Object.values(topicsLearned).flat().length}
+                      </p>
+                      <p className="text-xs text-muted-foreground">Topics Covered</p>
+                    </div>
+                    <div className="text-center p-4 bg-secondary/30 rounded-lg">
+                      <p className="text-2xl font-bold">3</p>
+                      <p className="text-xs text-muted-foreground">Trainers</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">This Month</span>
+                      <span className="font-medium">5 sessions</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">This Quarter</span>
+                      <span className="font-medium">14 sessions</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Average/Month</span>
+                      <span className="font-medium">4.8 sessions</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Upcoming Session */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -409,27 +787,21 @@ export default function DashboardPage() {
             >
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-xl">Quick Actions</CardTitle>
+                  <CardTitle className="text-xl flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-primary" />
+                    Next Session
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 gap-3">
-                  <Button variant="outline" className="h-auto py-4 flex flex-col gap-2">
-                    <Target className="w-5 h-5" />
-                    <span className="text-xs">Puzzles</span>
+                <CardContent>
+                  <div className="p-4 bg-primary/10 rounded-lg text-center">
+                    <p className="text-sm text-muted-foreground mb-1">Session #25</p>
+                    <p className="text-lg font-semibold mb-2">December 22, 2024</p>
+                    <p className="text-2xl font-bold text-primary mb-2">3:00 PM</p>
+                    <p className="text-sm text-muted-foreground">with GM Alexander Volkov</p>
+                  </div>
+                  <Button className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
+                    Join Session
                   </Button>
-                  <Button variant="outline" className="h-auto py-4 flex flex-col gap-2">
-                    <Play className="w-5 h-5" />
-                    <span className="text-xs">Play Game</span>
-                  </Button>
-                  <Button variant="outline" className="h-auto py-4 flex flex-col gap-2">
-                    <BarChart3 className="w-5 h-5" />
-                    <span className="text-xs">Analysis</span>
-                  </Button>
-                  <Link href="/trainers" className="contents">
-                    <Button variant="outline" className="h-auto py-4 flex flex-col gap-2">
-                      <User className="w-5 h-5" />
-                      <span className="text-xs">Trainers</span>
-                    </Button>
-                  </Link>
                 </CardContent>
               </Card>
             </motion.div>
