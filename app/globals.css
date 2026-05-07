@@ -1,41 +1,77 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+/* Dark Theme (Default) */
 :root {
-  /* Chess Academy - Elegant Light Theme */
+  --background: 220 20% 8%;
+  --foreground: 45 20% 95%;
+  --card: 220 18% 12%;
+  --card-foreground: 45 20% 95%;
+  --popover: 220 18% 10%;
+  --popover-foreground: 45 20% 95%;
+  --primary: 38 92% 50%;
+  --primary-foreground: 220 20% 8%;
+  --secondary: 220 15% 18%;
+  --secondary-foreground: 45 15% 85%;
+  --muted: 220 15% 20%;
+  --muted-foreground: 220 10% 60%;
+  --accent: 38 85% 55%;
+  --accent-foreground: 220 20% 8%;
+  --destructive: 0 75% 50%;
+  --destructive-foreground: 45 20% 95%;
+  --border: 220 15% 20%;
+  --input: 220 15% 18%;
+  --ring: 38 92% 50%;
+  --chart-1: 38 92% 50%;
+  --chart-2: 220 60% 60%;
+  --chart-3: 150 45% 45%;
+  --chart-4: 280 55% 55%;
+  --chart-5: 0 70% 55%;
+  --radius: 0.625rem;
+  --sidebar: 220 18% 10%;
+  --sidebar-foreground: 45 20% 95%;
+  --sidebar-primary: 38 92% 50%;
+  --sidebar-primary-foreground: 220 20% 8%;
+  --sidebar-accent: 220 15% 16%;
+  --sidebar-accent-foreground: 45 20% 95%;
+  --sidebar-border: 220 15% 20%;
+  --sidebar-ring: 38 92% 50%;
+}
+
+/* Light Theme */
+.light {
   --background: 0 0% 99%;
-  --foreground: 230 25% 15%;
+  --foreground: 220 25% 12%;
   --card: 0 0% 100%;
-  --card-foreground: 230 25% 15%;
+  --card-foreground: 220 25% 12%;
   --popover: 0 0% 100%;
-  --popover-foreground: 230 25% 15%;
-  --primary: 230 55% 50%;
+  --popover-foreground: 220 25% 12%;
+  --primary: 220 70% 45%;
   --primary-foreground: 0 0% 98%;
   --secondary: 45 20% 96%;
-  --secondary-foreground: 230 25% 25%;
+  --secondary-foreground: 220 25% 20%;
   --muted: 45 15% 95%;
-  --muted-foreground: 230 10% 45%;
+  --muted-foreground: 220 10% 45%;
   --accent: 35 85% 55%;
   --accent-foreground: 0 0% 98%;
   --destructive: 0 75% 50%;
   --destructive-foreground: 0 0% 98%;
-  --border: 230 15% 88%;
-  --input: 230 10% 92%;
-  --ring: 230 55% 50%;
-  --chart-1: 230 55% 50%;
+  --border: 220 15% 88%;
+  --input: 220 10% 92%;
+  --ring: 220 70% 45%;
+  --chart-1: 220 70% 45%;
   --chart-2: 35 85% 55%;
   --chart-3: 150 45% 45%;
   --chart-4: 200 50% 55%;
   --chart-5: 320 55% 50%;
-  --radius: 0.625rem;
   --sidebar: 45 15% 98%;
-  --sidebar-foreground: 230 25% 15%;
-  --sidebar-primary: 230 55% 50%;
+  --sidebar-foreground: 220 25% 12%;
+  --sidebar-primary: 220 70% 45%;
   --sidebar-primary-foreground: 0 0% 98%;
   --sidebar-accent: 45 15% 94%;
-  --sidebar-accent-foreground: 230 25% 15%;
-  --sidebar-border: 230 15% 88%;
-  --sidebar-ring: 230 55% 50%;
+  --sidebar-accent-foreground: 220 25% 12%;
+  --sidebar-border: 220 15% 88%;
+  --sidebar-ring: 220 70% 45%;
 }
 
 @theme inline {
@@ -89,21 +125,42 @@
   }
 }
 
-/* Custom scrollbar for light theme */
-::-webkit-scrollbar {
+/* Dark theme scrollbar */
+:root::-webkit-scrollbar,
+:root ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: hsl(45 15% 95%);
+:root::-webkit-scrollbar-track,
+:root ::-webkit-scrollbar-track {
+  background: hsl(220 18% 10%);
 }
 
-::-webkit-scrollbar-thumb {
-  background: hsl(230 15% 80%);
+:root::-webkit-scrollbar-thumb,
+:root ::-webkit-scrollbar-thumb {
+  background: hsl(220 15% 25%);
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(230 15% 70%);
+:root::-webkit-scrollbar-thumb:hover,
+:root ::-webkit-scrollbar-thumb:hover {
+  background: hsl(38 92% 50%);
+}
+
+/* Light theme scrollbar */
+.light::-webkit-scrollbar-track,
+.light ::-webkit-scrollbar-track {
+  background: hsl(45 15% 95%);
+}
+
+.light::-webkit-scrollbar-thumb,
+.light ::-webkit-scrollbar-thumb {
+  background: hsl(220 15% 80%);
+  border-radius: 4px;
+}
+
+.light::-webkit-scrollbar-thumb:hover,
+.light ::-webkit-scrollbar-thumb:hover {
+  background: hsl(220 70% 45%);
 }

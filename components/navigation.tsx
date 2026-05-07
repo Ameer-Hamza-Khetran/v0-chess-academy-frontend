@@ -5,6 +5,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -58,6 +59,7 @@ export function Navigation() {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
           <Link href="/dashboard">
             <Button variant="ghost" size="sm">
               Sign In
@@ -101,6 +103,10 @@ export function Navigation() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
+                <div className="flex items-center justify-between py-2">
+                  <span className="text-muted-foreground">Theme</span>
+                  <ThemeToggle />
+                </div>
                 <Link href="/dashboard" onClick={() => setIsOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start">
                     Sign In
