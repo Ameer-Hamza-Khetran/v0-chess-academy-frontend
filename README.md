@@ -33,4 +33,5 @@ To learn more, take a look at the following resources:
 - [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
 
 ## Alternate Idea figma:
-(https://rabid-coyote-88073656.figma.site/)
+[figma make](https://rabid-coyote-88073656.figma.site/)
+[google stitch](https://stitch.withgoogle.com/projects/1248451166174912081)
